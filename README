@@ -1,7 +1,7 @@
-ActsAsTaggableRedux
+ActsAsMachineTaggableRedux
 ===================
 
-Allows for user owned tags to be added to multiple classes, and makes tags easier to work with.
+Allows for user owned machinetags to be added to multiple classes, and makes machinetags easier to work with.
 
 
 Prerequisites
@@ -9,35 +9,35 @@ Prerequisites
 
 Install Edge Rails before you get started so you get RESTful routing.
 
-ActsAsTaggableRedux depends on database tables to store tagging information.  Create the migration for these tables with this command:
+ActsAsMachineTaggableRedux depends on database tables to store machinetagging information.  Create the migration for these tables with this command:
   
-  rake acts_as_taggable:db:create
+  rake acts_as_machinetaggable:db:create
   
 Then run the migration to create the tables with this command:
   
   rake db:migrate
   
 Also you will need to add this to your user model:
-  acts_as_tagger
+  acts_as_machinetagger
   
-OPTIONAL: The helper functions assume the pressence of a tags controller, that is what the tag clouds and tags will link to.
+OPTIONAL: The helper functions assume the pressence of a machinetags controller, that is what the machinetag clouds and machinetags will link to.
   
-OPTIONAL: To pretty up tag clouds and lists you can generate an example stylesheet with this command:
+OPTIONAL: To pretty up machinetag clouds and lists you can generate an example stylesheet with this command:
 
-  rake acts_as_taggable:stylesheet:create
+  rake acts_as_machinetaggable:stylesheet:create
 
-and then include this in your layouts that have tag clouds:
+and then include this in your layouts that have machinetag clouds:
 
-  <%= stylesheet_link_tag 'acts_as_taggable_stylesheet' %>
+  <%= stylesheet_link_machinetag 'acts_as_machinetaggable_stylesheet' %>
 
 
 Example
 =======
 
-The following is an example of how you might integrate tags with an Item model.
+The following is an example of how you might integrate machinetags with an Item model.
 
 config/routes.rb
-  may.resource :items, :tags
+  may.resource :items, :machinetags
   
   
 app/views/items/new.erb
@@ -47,21 +47,21 @@ app/views/items/new.erb
     
     <%= error_message_for :item %>
     
-    <b>Tags:</b> <%= f.text_field :tag_list -%>
+    <b>MachineTags:</b> <%= f.text_field :machinetag_list -%>
     
-    <%= submit_tag "Save" -%>
+    <%= submit_machinetag "Save" -%>
     
   <% end -%>
   
-if you want users to own taggings change the tags line to this
-  <b>Tags:</b> <%= f.text_field :tag_list, :value => @item.tag_list(user) -%>
+if you want users to own machinetaggings change the machinetags line to this
+  <b>MachineTags:</b> <%= f.text_field :machinetag_list, :value => @item.machinetag_list(user) -%>
 and add this line beneath it
   <%= f.hidden_field :user_id, :value => user.id -%>
   
 app/views/items/show.erb
-  Item tagged with: 
-  <% item.tags.each do |tag| -%>
-    <%= link_to_tag(tag) %>
+  Item machinetagged with: 
+  <% item.machinetags.each do |machinetag| -%>
+    <%= link_to_machinetag(machinetag) %>
   <% end -%>
   
 app/views/items/edit.erb
@@ -71,9 +71,9 @@ app/views/items/edit.erb
   
     <%= error_messages_for :item %>
     
-    <b>Tags:</b> <%= f.text_field :tag_list -%>
+    <b>MachineTags:</b> <%= f.text_field :machinetag_list -%>
     
-    <%= submit_tag "Save" -%>
+    <%= submit_machinetag "Save" -%>
   
   <% end -%>
 
@@ -100,7 +100,7 @@ app/controllers/items_controller.rb
     end
 
     def show
-      @item = Item.find(params[:id], :include => :tags)
+      @item = Item.find(params[:id], :include => :machinetags)
     end
     
     def edit
@@ -124,20 +124,15 @@ app/controllers/items_controller.rb
 
 
 
-Tag clouds
+MachineTag clouds
 ==========
 
-Tag clouds are created by a helper function, and depend on the counter cache to get fast accurate counts.  To ensure this keeps working properly, don't add new tags to a taggable in any way other than using the tag.tag(taggable) style.  This will ensure that the caches don't lose track.  Also, see the prerequisites for installing the stylesheet so that the tag cloud actually looks like a tag cloud.  Otherwise, just pop into a view that you want the tag cloud to appear and type this:
+MachineTag clouds are created by a helper function, and depend on the counter cache to get fast accurate counts.  To ensure this keeps working properly, don't add new machinetags to a machinetaggable in any way other than using the machinetag.machinetag(machinetaggable) style.  This will ensure that the caches don't lose track.  Also, see the prerequisites for installing the stylesheet so that the machinetag cloud actually looks like a machinetag cloud.  Otherwise, just pop into a view that you want the machinetag cloud to appear and type this:
 
-  <%= tag_cloud %>
+  <%= machinetag_cloud %>
   
   
   
-Contributing
-============
-
-Welcoming all pull requests on github.com at http://github.com/monki/acts_as_taggable_redux/tree/master or git://github.com/monki/acts_as_taggable_redux.git
-
-
-
-Copyright (c) 2008 monki(Wesley Beary), released under the MIT license
+Copyright (c) 2007 monki(Wesley Beary), released under the MIT license
+Copyright (c) 2008 aroedl(Andreas Roedl), released under the MIT license
+Copyright (c) 2008 hoodow(Ole Riesenberg), released under the MIT license

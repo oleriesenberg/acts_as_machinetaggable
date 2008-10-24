@@ -1,0 +1,7 @@
+.hMachinetagcloud .popularity 		{ margin:0; padding:0; }
+.hMachinetagcloud .popularity li	{ display:inline; text-decoration:none; }
+.hMachinetagcloud .popularity .popular				{ font-size:1.0em; }
+.hMachinetagcloud .popularity .v-popular 		{ font-size:1.2em; }
+.hMachinetagcloud .popularity .vv-popular 		{ font-size:1.4em; }
+.hMachinetagcloud .popularity .vvv-popular		{ font-size:1.6em; }
+.hMachinetagcloud .popularity .vvvv-popular	{ font-size:1.8em; }
